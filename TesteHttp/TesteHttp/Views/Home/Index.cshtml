@@ -7,7 +7,16 @@
 	nome2 = "José da Silva"
 })
 <hr />
+<form method="post">
+	<input type="text" name="nome1" placeholder="nome" /><br />
+	<input type="text" name="matricula1" placeholder="matricula" /><br />
+	<hr />
+	<input type="text" name="nome2" placeholder="nome" /><br />
+	<input type="text" name="matricula2" placeholder="matricula" /><br />
+	<button>Enviar por post</button>
+</form>
+<hr />
 <ul>
-	<li>@Request.QueryString["matricula1"]: @Request.QueryString["nome1"]</li>
-	<li>@Request.QueryString["matricula2"]: @Request.QueryString["nome2"]</li>
+	<li>@Request["matricula1"]: @Request["nome1"]</li>
+	<li>@Request["matricula2"]: @Request["nome2"]</li>
 </ul>

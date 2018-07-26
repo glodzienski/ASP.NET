@@ -14,5 +14,11 @@ namespace TesteHttp.Controllers
 
             return View();
         }
+
+        [HttpPost]
+        public ActionResult Index(string nome)
+        {
+            return View();
+        }
     }
 }
