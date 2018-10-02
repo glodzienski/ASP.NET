@@ -1,0 +1,144 @@
+﻿@model IEnumerable<Data.ParkingSys.Model.Comanda>
+
+@{
+    ViewBag.Title = "Comanda";
+}
+
+<h2>Comandas</h2>
+@Html.AntiForgeryToken()
+<p>
+    <button class="btn btn-success" id="new">Nova</button>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ClienteID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ComandaStatusID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FuncionarioID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ServicoID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VagaID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VeiculoID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Total)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item._Cliente.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item._ComandaStatus.Descricao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item._Funcionario.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item._Servico.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item._Vaga.Codigo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item._Veiculo.Placa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Total)
+            </td>
+            <td>
+                @if (@item.ComandaStatusID != 3)
+                {
+                    <button class="btn btn-default edit" id="edit" data-id="@item.ComandaID"><i class="glyphicon glyphicon-edit"></i>Editar</button>
+                    <button class="btn btn-danger close-order" id="close-order" data-id="@item.ComandaID"><i class="glyphicon glyphicon-trash"></i>Fechar</button>
+                }
+                <button class="btn btn-info details" id="details" data-id="@item.ComandaID"><i class="glyphicon glyphicon-info-sign"></i>Detalhes</button>
+            </td>
+        </tr>
+    }
+
+</table>
+<div class="modal fade" id="close-confirm" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Atenção</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>Deseja fechar a comanda?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary close-now">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        $(function () {
+            $('.close-order').click(function () {
+                const id = $(this).attr("data-id");
+                $('#close-confirm').modal('show');
+                $('.close-now').click(_ => {
+                    ajax.delete(`Close/${id}`, {
+                        __RequestVerificationToken: $('input[name = "__RequestVerificationToken"]').val(),
+                    }, () => {
+                        location.reload();
+                    })
+                });
+            });
+            $(".details").click(function () {
+                const id = $(this).attr("data-id");
+                $('#modal-area').load("Details/" + id, () => {
+                    $(".modal-details-comanda").modal('show')
+                })
+            });
+            const modalCreateEditAction = function (event) {
+                const route = (event.currentTarget.id === 'edit')
+                    ? 'Edit/' + $(this).attr("data-id")
+                    : 'Create';
+                console.log($(this).attr("data-id"))
+                $('#modal-area').load(route, () => {
+                    $(".modal-create-edit-comanda").modal('show')
+                    $(".submit").click(() => {
+                        ajax.post(route, {
+                            __RequestVerificationToken: $('input[name = "__RequestVerificationToken"]').val(),
+                            ComandaID: $('#ComandaID').val(),
+                            ClienteID: $('#ClienteID').val(),
+                            VeiculoID: $('#VeiculoID').val(),
+                            ServicoID: $('#ServicoID').val(),
+                            VagaID: $('#VagaID').val(),
+                        }, (response) => {
+                            if (response.Status && response.Status == 'OK') {
+                                location.reload()
+                            }
+                            response.map(({ field, message }) => {
+                                $("form").find(`[data-valmsg-for='${field}']`).text(message)
+                            })
+                        })
+                    });
+                })
+            }
+            $("#new").click(modalCreateEditAction);
+            $(".edit").click(modalCreateEditAction);
+        })
+    </script>
+}

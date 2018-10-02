@@ -1,0 +1,114 @@
+﻿@model Data.ParkingSys.Model.Cliente
+
+<div class="modal fade modal-details-cliente" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Cliente detalhes</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <dl class="dl-horizontal">
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Nome)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.Nome)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Sobrenome)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.Sobrenome)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Email)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.Email)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Ativo)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.Ativo)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Cpf)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.Cpf)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Cep)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.Cep)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Uf)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.Uf)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Cidade)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.Cidade)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Bairro)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.Bairro)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Logradouro)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.Logradouro)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Numero)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.Numero)
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>

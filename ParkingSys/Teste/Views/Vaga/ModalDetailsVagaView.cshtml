@@ -1,0 +1,67 @@
+﻿@model Data.ParkingSys.Model.Vaga
+
+<div class="modal fade modal-details-vaga" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Vaga detalhes</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <dl class="dl-horizontal">
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.VagaTipoID)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model._VagaTipo.Descricao)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Codigo)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.Codigo)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Andar)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.Andar)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Ocupada)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.Ocupada)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Ativo)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.Ativo)
+                                </dd>
+
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>

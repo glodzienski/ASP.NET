@@ -1,0 +1,83 @@
+﻿@model Data.ParkingSys.Model.Comanda
+
+<div class="modal fade modal-details-comanda" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Comanda detalhes</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <dl class="dl-horizontal">
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.ClienteID)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model._Cliente.Nome)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.ComandaStatusID)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model._ComandaStatus.Descricao)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.FuncionarioID)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model._Funcionario.Nome)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.ServicoID)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model._Servico.Nome)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.VagaID)
+                                </dt>
+
+                                <dd>
+                                    Código: @Html.DisplayFor(model => model._Vaga.Codigo) - Andar: @Html.DisplayFor(model => model._Vaga.Andar)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.VeiculoID)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model._Veiculo.Placa)
+                                </dd>
+
+                                <dt>
+                                    @Html.DisplayNameFor(model => model.Total)
+                                </dt>
+
+                                <dd>
+                                    @Html.DisplayFor(model => model.Total)
+                                </dd>
+
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>

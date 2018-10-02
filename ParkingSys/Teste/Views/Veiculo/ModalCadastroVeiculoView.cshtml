@@ -1,0 +1,66 @@
+﻿@model Data.ParkingSys.Model.Veiculo
+
+<div class="modal fade modal-create-edit-veiculo" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Cadastre um veículo</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                            <div class="col-12">
+                                @Html.HiddenFor(model => model.VeiculoID)
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Placa, htmlAttributes: new { @class = "control-label col-3" })
+                                    <div class="col-12">
+                                        @Html.EditorFor(model => model.Placa, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.Placa, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.ClienteID, htmlAttributes: new { @class = "control-label col-3" })
+                                    <div class="col-12">
+                                        @Html.DropDownListFor(model => model.ClienteID, (SelectList)ViewBag.clientes, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.ClienteID, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.VeiculoTipoID, htmlAttributes: new { @class = "control-label col-3" })
+                                    <div class="col-12">
+                                        @Html.DropDownListFor(model => model.VeiculoTipoID, (SelectList)ViewBag.veiculoTipos, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.VeiculoTipoID, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.Marca, htmlAttributes: new { @class = "control-label col-3" })
+                                    <div class="col-12">
+                                        <select class="form-control" data-val="true" id="Marca" name="Marca">
+                                        </select>
+                                        @Html.ValidationMessageFor(model => model.Marca, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success submit">Salvar</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>

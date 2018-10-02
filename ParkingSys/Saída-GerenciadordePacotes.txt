@@ -1,0 +1,19 @@
+﻿
+
+Tentando coletar informações de dependências do pacote 'EntityFramework.6.2.0' em relação ao projeto 'DAL', visando '.NETFramework,Version=v4.6.1'
+A coleta de informações de dependência levou 3,56 ms
+Tentando resolver dependências do pacote 'EntityFramework.6.2.0' com DependencyBehavior 'Lowest'
+Resolver as informações de dependência levou 0 ms
+Resolvendo ações para instalar o pacote 'EntityFramework.6.2.0'
+Ações resolvidas para instalar o pacote 'EntityFramework.6.2.0'
+Encontrado o pacote 'EntityFramework 6.2.0' em 'C:\Users\Crystopher\Source\Repos\ParkingSys\ParkingSys\packages'.
+O pacote 'EntityFramework.6.2.0' já existe na pasta 'C:\Users\Crystopher\Source\Repos\ParkingSys\ParkingSys\packages'
+Pacote 'EntityFramework.6.2.0' adicionado a 'packages.config'
+Executando o arquivo de script 'C:\Users\Crystopher\Source\Repos\ParkingSys\ParkingSys\packages\EntityFramework.6.2.0\tools\install.ps1'...
+
+Type 'get-help EntityFramework' to see all available Entity Framework commands.
+'EntityFramework 6.2.0' instalado com sucesso em DAL
+Executar ações do nuget levou 1,83 sec
+Tempo Decorrido: 00:00:01.8393751
+========== Concluído ==========
+

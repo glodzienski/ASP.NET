@@ -1,0 +1,124 @@
+﻿@model Data.ParkingSys.Model.Cliente
+
+<div class="modal fade modal-create-edit-cliente" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Cadastre um cliente</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                            @Html.HiddenFor(model => model.ClienteID)
+                            <div class="form-group col-md-12">
+                                @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-12">
+                                    @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-12">
+                                @Html.LabelFor(model => model.Sobrenome, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-12">
+                                    @Html.EditorFor(model => model.Sobrenome, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Sobrenome, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-12">
+                                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-12">
+                                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-12">
+                                @Html.LabelFor(model => model.Ativo, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-12">
+                                    <div class="checkbox">
+                                        @Html.EditorFor(model => model.Ativo)
+                                        @Html.ValidationMessageFor(model => model.Ativo, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-12">
+                                @Html.LabelFor(model => model.Cpf, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-12">
+                                    @Html.EditorFor(model => model.Cpf, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Cpf, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-12">
+                                @Html.LabelFor(model => model.Cep, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-12">
+                                    @Html.EditorFor(model => model.Cep, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Cep, "", new { @class = "text-danger" })
+                                    <div id="resposta-cep-consulta" class="alert alert-primary" role="alert"></div>
+                                    <input type="hidden" id="Uf" />
+                                    <input type="hidden" id="Cidade" />
+                                    <input type="hidden" id="Bairro" />
+                                    <input type="hidden" id="Logradouro" />
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-12">
+                                @Html.LabelFor(model => model.Numero, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-12">
+                                    @Html.EditorFor(model => model.Numero, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.Numero, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success submit">Salvar</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#Cpf').inputmask("999.999.999-99");
+        $('#Cep').on('change paste keyup', ({ currentTarget }) => {
+            const cep = currentTarget.valueAsNumber;
+            if (cep.toString().length === 8) {//cep valido
+                setTimeout(_ => {
+                    $('#resposta-cep-consulta').text('Validando CEP...')
+                    ajax.get('/api/Cep?cep=' + cep,
+                        null,
+                        ({ uf, localidade, bairro, logradouro }) => {
+                            $('#Uf').val(uf);
+                            $('#Cidade').val(localidade);
+                            $('#Bairro').val(bairro);
+                            $('#Logradouro ').val(logradouro);
+                            $('#resposta-cep-consulta').text('Cep válido. ' + 'Uf: ' + uf
+                                + ', Cidade: ' + localidade + ', Bairro: ' + bairro
+                                + ', Logradouro: ' + logradouro);
+                        },
+                        (error) => {
+                            $('#resposta-cep-consulta').text('Cep inválido.');
+                        }
+                    );
+                }, 500);
+            } else {
+                $('#resposta-cep-consulta').text('')
+            }
+        });
+    });
+</script>
